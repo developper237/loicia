@@ -166,8 +166,12 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.2; letter-spac
   height: 42px;
   width: auto;
   object-fit: contain;
+  background: #fff;
+  padding: 7px 12px;
+  border-radius: 11px;
+  box-shadow: 0 6px 18px -8px rgba(0, 0, 0, .5);
 }
-.footer__brand .brand__logo { height: 36px; }
+.footer__brand .brand__logo { height: 36px; padding: 6px 10px; }
 
 
 .nav__links { display: flex; align-items: center; gap: 34px; }
