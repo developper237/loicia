@@ -15,7 +15,7 @@
   <meta property="og:locale" content="fr_CM" />
 
   <!-- Favicon SVG -->
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236366f1'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M20 44V20l24 24V20' stroke='white' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2306b6d4'/%3E%3Cpath d='M20 44V20l24 24V20' stroke='white' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -49,10 +49,7 @@
   <header class="nav" id="nav">
     <div class="container nav__inner">
       <a href="#accueil" class="brand" aria-label="SmartCampus — accueil">
-        <span class="brand__logo" aria-hidden="true">
-          <svg viewBox="0 0 64 64" width="26" height="26"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6366f1"/><stop offset="1" stop-color="#06b6d4"/></linearGradient></defs><rect width="64" height="64" rx="14" fill="url(#lg)"/><path d="M20 44V20l24 24V20" stroke="white" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-        <span class="brand__name">Smart<span>Campus</span></span>
+        <img class="brand__logo" src="https://raw.githubusercontent.com/developper237/Edunotify-mobile/main/lib/assets/logos/adapter.png" alt="SmartCampus" width="63" height="42" />
       </a>
 
       <nav class="nav__links" id="navLinks" aria-label="Navigation principale">
@@ -78,18 +75,18 @@
       <div class="hero__bg" aria-hidden="true">
         <div class="hero__blob hero__blob--1"></div>
         <div class="hero__blob hero__blob--2"></div>
-        <div class="hero__grid"></div>
       </div>
 
       <div class="container hero__inner">
         <div class="hero__content">
           <span class="badge badge--pill reveal">
             <span class="badge__dot" aria-hidden="true"></span>
-            🇨🇲 100% conçu pour les établissements camerounais
+            <img class="flag" src="https://flagcdn.com/w40/cm.png" alt="Drapeau du Cameroun" width="20" height="14" />
+            100% conçu pour les établissements camerounais
           </span>
 
           <h1 class="hero__title reveal">
-            La gestion académique de votre établissement, <span class="grad">enfin simple.</span>
+            La gestion académique de votre établissement, <span class="accent">enfin simple.</span>
           </h1>
 
           <p class="hero__subtitle reveal">
@@ -116,67 +113,38 @@
           </ul>
         </div>
 
-        <!-- Mockup produit -->
+        <!-- Photo téléphone réaliste -->
         <div class="hero__visual reveal">
-          <div class="phone" aria-hidden="true">
-            <div class="phone__notch"></div>
-            <div class="phone__screen">
-              <div class="phone__top">
-                <span class="phone__avatar">SC</span>
-                <div>
-                  <strong>Lycée Moderne de Douala</strong>
-                  <small>Appel de classe — 08:12</small>
-                </div>
-                <span class="phone__live"><i></i> EN DIRECT</span>
+          <figure class="hero__phone">
+            <img
+              src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=900&q=80"
+              alt="Étudiant utilisant SmartCampus sur son téléphone"
+              width="400" height="460"
+              loading="lazy"
+            />
+            <figcaption class="hero__phone-caption">
+              <span class="sc">SC</span>
+              <div>
+                <strong>Appel de classe en direct</strong>
+                <small>38/42 présents · 8 via QR hors ligne</small>
               </div>
-
-              <div class="phone__stat-row">
-                <div class="phone__stat">
-                  <small>Présents</small>
-                  <strong>38</strong>
-                </div>
-                <div class="phone__stat">
-                  <small>Absents</small>
-                  <strong>04</strong>
-                </div>
-                <div class="phone__stat">
-                  <small>Taux</small>
-                  <strong>90%</strong>
-                </div>
-              </div>
-
-              <div class="phone__qr">
-                <div class="phone__qr-code">
-                  <svg viewBox="0 0 29 29" width="74" height="74">
-                    <path fill="#0b1020" d="M0 0h7v7H0zM22 0h7v7h-7zM0 22h7v7H0zM11 0h4v4h-4zM22 11h4v4h-4zM15 15h4v4h-4zM0 11h4v4H0zM11 22h4v4h-4z"/>
-                    <path fill="#0b1020" d="M18 0h2v2h-2zM26 8h3v2h-3zM8 18h3v2H8zM22 18h2v3h-2zM18 22h2v7h-2zM26 22h3v7h-3zM4 11h2v3H4z"/>
-                  </svg>
-                </div>
-                <div class="phone__qr-text">
-                  <small>Scannez pour vous pointer</small>
-                  <strong>Code : 482 913</strong>
-                </div>
-              </div>
-
-              <div class="phone__check">
-                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 2 4 5v6c0 5.25 3.4 10.15 8 11 4.6-.85 8-5.75 8-11V5l-8-3z" fill="currentColor"/><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
-                <div>
-                  <strong>38/42 étudiants présents</strong>
-                  <small>8 via QR hors ligne · 30 via code OTP</small>
-                </div>
-              </div>
-            </div>
-          </div>
+              <span class="hero__phone-live"><i></i> EN DIRECT</span>
+            </figcaption>
+          </figure>
 
           <div class="hero__float hero__float--notif">
-            <span class="hero__float-icon">🔔</span>
+            <span class="hero__float-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+            </span>
             <div>
               <strong>Résultats disponibles</strong>
               <small>Publiés il y a 2 min</small>
             </div>
           </div>
           <div class="hero__float hero__float--chat">
-            <span class="hero__float-icon">🤖</span>
+            <span class="hero__float-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 8V4m-2 0h4"/><circle cx="9" cy="13" r="1.3"/><circle cx="15" cy="13" r="1.3"/><path d="M9 17h6"/></svg>
+            </span>
             <div>
               <strong>Assistant IA</strong>
               <small>« Quelle est ma moyenne ? »</small>
@@ -310,7 +278,7 @@
 
         <div class="roles">
           <article class="role reveal">
-            <span class="role__emoji" aria-hidden="true">🎓</span>
+            <span class="role__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 2.7 2.5 6 2.5s6-1.5 6-2.5v-5"/></svg></span>
             <h3>Étudiant</h3>
             <ul>
               <li>Se pointe par QR code, même hors ligne</li>
@@ -319,7 +287,7 @@
             </ul>
           </article>
           <article class="role reveal">
-            <span class="role__emoji" aria-hidden="true">📣</span>
+            <span class="role__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></span>
             <h3>Délégué</h3>
             <ul>
               <li>Lance l'appel en 5 secondes</li>
@@ -328,7 +296,7 @@
             </ul>
           </article>
           <article class="role reveal">
-            <span class="role__emoji" aria-hidden="true">🏫</span>
+            <span class="role__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/><path d="M9 11h.01M15 11h.01"/></svg></span>
             <h3>Chef de département</h3>
             <ul>
               <li>Suit la présence de toutes ses classes</li>
@@ -337,7 +305,7 @@
             </ul>
           </article>
           <article class="role reveal">
-            <span class="role__emoji" aria-hidden="true">🛡️</span>
+            <span class="role__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span>
             <h3>Admin &amp; direction</h3>
             <ul>
               <li>Gère utilisateurs, établissements et abonnements</li>
@@ -426,8 +394,11 @@
         </div>
 
         <p class="pricing__note reveal">
-          💳 Paiement sécurisé par <strong>MTN MoMo</strong> &amp; <strong>Orange Money</strong> (via CinetPay).
-          Facture électronique envoyée après chaque paiement. Sans engagement : annulez quand vous voulez.
+          <span>Paiement sécurisé par</span>
+          <img class="pay-logo" src="https://upload.wikimedia.org/wikipedia/commons/a/af/MTN_Logo.svg" alt="MTN Mobile Money" width="72" height="26" loading="lazy" />
+          <span>&amp;</span>
+          <img class="pay-logo" src="https://upload.wikimedia.org/wikipedia/commons/1/19/Logo_Orange_Money.svg" alt="Orange Money" width="72" height="26" loading="lazy" />
+          <span>(via CinetPay). Facture électronique après chaque paiement. Sans engagement : annulez quand vous voulez.</span>
         </p>
       </div>
     </section>
@@ -443,7 +414,7 @@
 
         <div class="testimonials">
           <figure class="testimonial reveal">
-            <div class="testimonial__stars" aria-label="5 étoiles sur 5">★★★★★</div>
+            <div class="testimonial__stars" aria-label="5 étoiles sur 5"><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2l-6.1 3.4 1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2l-6.1 3.4 1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2l-6.1 3.4 1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2l-6.1 3.4 1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2l-6.1 3.4 1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg></div>
             <blockquote>
               « Le QR code hors ligne a changé notre quotidien : les étudiants n'ont plus d'excuse pour rater l'appel, même quand le réseau coupe. On gagne 20 minutes par cours. »
             </blockquote>
@@ -457,7 +428,7 @@
           </figure>
 
           <figure class="testimonial reveal">
-            <div class="testimonial__stars" aria-label="5 étoiles sur 5">★★★★★</div>
+            <div class="testimonial__stars" aria-label="5 étoiles sur 5"><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2l-6.1 3.4 1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2l-6.1 3.4 1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2l-6.1 3.4 1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2l-6.1 3.4 1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2l-6.1 3.4 1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg></div>
             <blockquote>
               « Fini les cahiers d'appel à remplir à la main. Je lance l'appel, l'app fait le reste et la direction a les statistiques en temps réel. Un gain de temps énorme. »
             </blockquote>
@@ -471,7 +442,7 @@
           </figure>
 
           <figure class="testimonial reveal">
-            <div class="testimonial__stars" aria-label="5 étoiles sur 5">★★★★★</div>
+            <div class="testimonial__stars" aria-label="5 étoiles sur 5"><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2l-6.1 3.4 1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2l-6.1 3.4 1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2l-6.1 3.4 1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2l-6.1 3.4 1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2l-6.1 3.4 1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg></div>
             <blockquote>
               « Le paiement par Mobile Money est un vrai plus : on a souscrit en 10 minutes depuis le bureau, sans carte bancaire. Le support répond vite et en français. »
             </blockquote>
@@ -538,7 +509,7 @@
               Nous écrire sur WhatsApp
             </a>
           </div>
-          <p class="cta__micro">🇨🇲 Support à Yaoundé &amp; Douala · Réponse sous 24 h ouvrées</p>
+          <p class="cta__micro"><img class="flag" src="https://flagcdn.com/w40/cm.png" alt="Drapeau du Cameroun" width="20" height="14" /> Support à Yaoundé &amp; Douala · Réponse sous 24 h ouvrées</p>
         </div>
       </div>
     </section>
@@ -550,17 +521,14 @@
       <div class="footer__grid">
         <div class="footer__brand">
           <a href="#accueil" class="brand">
-            <span class="brand__logo" aria-hidden="true">
-              <svg viewBox="0 0 64 64" width="24" height="24"><defs><linearGradient id="lgf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6366f1"/><stop offset="1" stop-color="#06b6d4"/></linearGradient></defs><rect width="64" height="64" rx="14" fill="url(#lgf)"/><path d="M20 44V20l24 24V20" stroke="white" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            <span class="brand__name">Smart<span>Campus</span></span>
+            <img class="brand__logo" src="https://raw.githubusercontent.com/developper237/Edunotify-mobile/main/lib/assets/logos/adapter.png" alt="SmartCampus" width="54" height="36" />
           </a>
           <p>La plateforme de gestion académique conçue pour le Cameroun. Présence, notes, notifications et rapports — tout au même endroit.</p>
           <div class="footer__pay">
             <span>Paiements acceptés</span>
             <div class="footer__pay-badges">
-              <span>📱 MTN MoMo</span>
-              <span>📱 Orange Money</span>
+              <img class="pay-logo" src="https://upload.wikimedia.org/wikipedia/commons/a/af/MTN_Logo.svg" alt="MTN Mobile Money" width="76" height="30" loading="lazy" />
+              <img class="pay-logo" src="https://upload.wikimedia.org/wikipedia/commons/1/19/Logo_Orange_Money.svg" alt="Orange Money" width="76" height="30" loading="lazy" />
             </div>
           </div>
         </div>
@@ -589,7 +557,7 @@
 
       <div class="footer__bottom">
         <p>© <span id="year">2026</span> SmartCampus — EduNotify. Tous droits réservés.</p>
-        <p class="footer__flag">🇨🇲 Fièrement conçu au Cameroun</p>
+        <p class="footer__flag"><img class="flag" src="https://flagcdn.com/w40/cm.png" alt="Drapeau du Cameroun" width="20" height="14" /> Fièrement conçu au Cameroun</p>
       </div>
     </div>
   </footer>
