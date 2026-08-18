@@ -177,4 +177,92 @@
       }
     })
   );
+
+  /* ── Modal de demande de création d'établissement ──────────── */
+  const leadModal       = document.getElementById('leadModal');
+  const leadForm        = document.getElementById('leadForm');
+  const leadFormView    = document.getElementById('leadFormView');
+  const leadSuccessView = document.getElementById('leadSuccessView');
+  const leadError       = document.getElementById('leadError');
+  const leadSubmit      = document.getElementById('leadSubmit');
+  const leadSubmitLabel = leadSubmit.querySelector('.lead__submit-label');
+  const leadSpinner     = leadSubmit.querySelector('.lead__spinner');
+  const LEAD_ENDPOINT   = 'https://smartcampus-auth.onrender.com/auth/leads';
+
+  const openLeadModal = (plan) => {
+    leadForm.reset();
+    leadError.hidden = true;
+    document.getElementById('leadPlan').value = plan || 'pro';
+    leadSuccessView.hidden = true;
+    leadFormView.hidden = false;
+    leadSubmit.disabled = false;
+    leadSubmitLabel.textContent = "Envoyer ma demande de création d'établissement";
+    leadSpinner.hidden = true;
+    leadModal.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => document.getElementById('leadEtab').focus(), 60);
+  };
+
+  const closeLeadModal = () => {
+    leadModal.classList.remove('is-open');
+    document.body.style.overflow = '';
+  };
+
+  // Tous les CTA « essai gratuit » / « souscription » ouvrent le formulaire
+  document.querySelectorAll('a[href="#essai"], a[data-plan]').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      openLeadModal(a.dataset.plan || 'pro');
+    });
+  });
+
+  document.querySelectorAll('[data-close-lead]').forEach((el) =>
+    el.addEventListener('click', closeLeadModal)
+  );
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && leadModal.classList.contains('is-open')) closeLeadModal();
+  });
+
+  // Clic sur l'overlay = fermeture
+  leadModal.querySelector('.modal__overlay').addEventListener('click', closeLeadModal);
+
+  leadForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!leadForm.checkValidity()) {
+      leadForm.reportValidity();
+      return;
+    }
+
+    leadError.hidden = true;
+    leadSubmit.disabled = true;
+    leadSubmitLabel.textContent = 'Envoi en cours...';
+    leadSpinner.hidden = false;
+
+    try {
+      const payload = Object.fromEntries(new FormData(leadForm));
+      const res = await fetch(LEAD_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || "Erreur lors de l'envoi de la demande");
+
+      document.getElementById('leadSuccessName').textContent =
+        `${payload.prenomAdmin} ${payload.nomAdmin}`;
+      document.getElementById('leadSuccessEtab').textContent = payload.etablissementNom;
+      document.getElementById('leadSuccessEmail').textContent = payload.emailAdmin;
+      leadFormView.hidden = true;
+      leadSuccessView.hidden = false;
+    } catch (err) {
+      leadError.textContent =
+        err.message || 'Une erreur est survenue. Veuillez réessayer dans quelques instants.';
+      leadError.hidden = false;
+    } finally {
+      leadSubmit.disabled = false;
+      leadSubmitLabel.textContent = "Envoyer ma demande de création d'établissement";
+      leadSpinner.hidden = true;
+    }
+  });
 })();
