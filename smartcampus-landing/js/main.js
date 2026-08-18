@@ -7,9 +7,15 @@
   /* ── Année du footer ───────────────────────────────────────── */
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  /* ── Navbar : fond au scroll ───────────────────────────────── */
+  /* ── Navbar : fond au scroll + scroll progress ─────────────── */
   const nav = document.getElementById('nav');
-  const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 12);
+  const onScroll = () => {
+    nav.classList.toggle('is-scrolled', window.scrollY > 12);
+    // Barre de progression
+    const docH = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docH > 0 ? Math.min((window.scrollY / docH) * 100, 100) : 0;
+    nav.style.setProperty('--scroll-progress', pct + '%');
+  };
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
@@ -97,6 +103,48 @@
     { threshold: 0 }
   );
   document.querySelectorAll('.reveal').forEach((el) => ioReveal.observe(el));
+
+  /* ── Tilt 3D sur les cartes au mousemove ──────────────────── */
+  document.querySelectorAll('.feature, .role, .plan, .step').forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - .5;
+      const y = (e.clientY - rect.top) / rect.height - .5;
+      card.style.transform = `perspective(600px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateY(-6px) scale(1.02)`;
+      card.classList.add('is-tilting');
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+      card.classList.remove('is-tilting');
+    });
+  });
+
+  /* ── Parallax subtil sur les blobs du hero ────────────────── */
+  const blobs = document.querySelectorAll('.hero__blob');
+  const heroVisual = document.querySelector('.hero__visual');
+  window.addEventListener('scroll', () => {
+    const sy = window.scrollY;
+    blobs.forEach((b, i) => {
+      b.style.transform = `translateY(${sy * (i === 0 ? .12 : .08)}px) scale(${1 + sy * .0002})`;
+    });
+    if (heroVisual) {
+      heroVisual.style.transform = `translateY(${sy * .04}px)`;
+    }
+  }, { passive: true });
+
+  /* ── Ripple au clic sur les boutons ────────────────────────── */
+  document.querySelectorAll('.btn').forEach((btn) => {
+    btn.addEventListener('click', function (e) {
+      const rect = this.getBoundingClientRect();
+      const ripple = document.createElement('span');
+      const size = Math.max(rect.width, rect.height);
+      ripple.style.cssText = `position:absolute;border-radius:50%;background:rgba(255,255,255,.35);width:${size}px;height:${size}px;left:${e.clientX - rect.left - size/2}px;top:${e.clientY - rect.top - size/2}px;transform:scale(0);animation:ripple .5s ease-out;pointer-events:none;`;
+      this.style.position = 'relative';
+      this.style.overflow = 'hidden';
+      this.appendChild(ripple);
+      ripple.addEventListener('animationend', () => ripple.remove());
+    });
+  });
 
   /* ── Toggle mensuel / annuel ───────────────────────────────── */
   const toggleBtns = document.querySelectorAll('.toggle__btn');

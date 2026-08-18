@@ -344,6 +344,7 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.2; letter-spac
   font-size: 2.1rem; font-weight: 800;
   color: var(--primary);
 }
+.hero__stat strong small { font-size: 1.2rem; font-weight: 600; }
 .hero__stat span { font-size: .85rem; color: var(--text-muted); }
 
 /* ── Sections ─────────────────────────────────────────────────── */
@@ -366,13 +367,28 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.2; letter-spac
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 30px 26px;
-  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+  overflow: hidden;
+  transition: transform .35s cubic-bezier(.16,1,.3,1), border-color .25s ease, box-shadow .35s ease;
 }
 .feature:hover {
-  transform: translateY(-6px);
+  transform: translateY(-8px);
   border-color: #cbd5e1;
-  box-shadow: 0 20px 44px -20px rgba(2, 6, 23, .18);
+  box-shadow: 0 24px 52px -20px rgba(2, 6, 23, .2);
 }
+.feature--img { padding: 0; }
+.feature__img {
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.feature__img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .5s cubic-bezier(.16,1,.3,1);
+}
+.feature--img:hover .feature__img img { transform: scale(1.08); }
+.feature__body { padding: 26px 26px 30px; }
 .feature__icon {
   display: grid; place-items: center;
   width: 52px; height: 52px;
@@ -405,8 +421,24 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.2; letter-spac
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 34px 28px;
+  padding: 0;
+  overflow: hidden;
+  transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s ease;
 }
+.step:hover { transform: translateY(-6px); box-shadow: 0 20px 44px -20px rgba(2, 6, 23, .18); }
+.step__img {
+  width: 100%; height: 180px;
+  overflow: hidden;
+}
+.step__img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .5s cubic-bezier(.16,1,.3,1);
+}
+.step:hover .step__img img { transform: scale(1.06); }
+.step__num { padding: 28px 28px 0; display: block; }
+.step h3 { margin: 10px 28px 10px; }
+.step p { padding: 0 28px 34px; }
 .step__num {
   font-family: var(--font-display);
   font-size: 3rem; font-weight: 800;
@@ -422,9 +454,27 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.2; letter-spac
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 28px 24px;
-  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+  overflow: hidden;
+  transition: transform .35s cubic-bezier(.16,1,.3,1), border-color .25s ease, box-shadow .35s ease;
 }
-.role:hover { transform: translateY(-5px); border-color: #cbd5e1; box-shadow: 0 16px 36px -18px rgba(2,6,23,.16); }
+.role:hover { transform: translateY(-6px); border-color: #cbd5e1; box-shadow: 0 20px 44px -18px rgba(2,6,23,.18); }
+.role--img { padding: 0; }
+.role__img {
+  width: 100%; height: 140px;
+  overflow: hidden;
+}
+.role__img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .5s cubic-bezier(.16,1,.3,1);
+}
+.role--img:hover .role__img img { transform: scale(1.08); }
+.role--img .role__icon,
+.role--img h3,
+.role--img ul { padding: 0 24px; }
+.role--img .role__icon { margin: 22px 0 16px; }
+.role--img h3 { padding-left: 24px; }
+.role--img ul { padding-left: 24px; padding-right: 24px; }
 .role__icon {
   width: 52px; height: 52px;
   display: grid; place-items: center;
@@ -750,4 +800,138 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.2; letter-spac
   .hero__cta .btn { width: 100%; }
   .cta__card { padding: 54px 24px; }
   .cta__buttons .btn { width: 100%; }
+}
+
+/* ═══════════ ANIMATIONS AMÉLIORÉES ═══════════ */
+
+/* Staggered reveal — les enfants d'une grille apparaissent décalés */
+.features .feature:nth-child(1) { transition-delay: 0s; }
+.features .feature:nth-child(2) { transition-delay: .08s; }
+.features .feature:nth-child(3) { transition-delay: .16s; }
+.features .feature:nth-child(4) { transition-delay: .24s; }
+.features .feature:nth-child(5) { transition-delay: .32s; }
+.features .feature:nth-child(6) { transition-delay: .4s; }
+
+.steps .step:nth-child(1) { transition-delay: 0s; }
+.steps .step:nth-child(2) { transition-delay: .12s; }
+.steps .step:nth-child(3) { transition-delay: .24s; }
+
+.roles .role:nth-child(1) { transition-delay: 0s; }
+.roles .role:nth-child(2) { transition-delay: .08s; }
+.roles .role:nth-child(3) { transition-delay: .16s; }
+.roles .role:nth-child(4) { transition-delay: .24s; }
+
+.plans .plan:nth-child(1) { transition-delay: 0s; }
+.plans .plan:nth-child(2) { transition-delay: .1s; }
+.plans .plan:nth-child(3) { transition-delay: .2s; }
+
+/* Reveal avec scale subtil pour les cartes */
+.feature.reveal,
+.step.reveal,
+.role.reveal,
+.plan.reveal,
+.testimonial.reveal {
+  transform: translateY(30px) scale(.97);
+}
+.feature.reveal.is-visible,
+.step.reveal.is-visible,
+.role.reveal.is-visible,
+.plan.reveal.is-visible,
+.testimonial.reveal.is-visible {
+  transform: translateY(0) scale(1);
+}
+
+/* Effet de brillance au hover sur les boutons principaux */
+.btn--primary {
+  position: relative;
+  overflow: hidden;
+}
+.btn--primary::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
+  transition: left .5s ease;
+}
+.btn--primary:hover::after { left: 100%; }
+
+/* Compteur : suffixe 'j' et '%' en plus petit */
+.hero__stat strong small {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* Scroll progress bar dans la navbar */
+av.nav::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  height: 2px;
+  width: var(--scroll-progress, 0%);
+  background: var(--primary);
+  transition: width .15s linear;
+}
+
+/* Pulse sur le badge "Hors ligne" */
+.feature__tag {
+  animation: tag-pulse 3s ease-in-out infinite;
+}
+@keyframes tag-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(249,115,22,.4); }
+  50% { box-shadow: 0 0 0 8px rgba(249,115,22,0); }
+}
+
+/* Carte populaire : halo pulsant */
+.plan--popular {
+  animation: popular-glow 4s ease-in-out infinite;
+}
+@keyframes popular-glow {
+  0%, 100% { box-shadow: 0 12px 34px -12px rgba(37,99,235,.4); }
+  50% { box-shadow: 0 18px 48px -10px rgba(37,99,235,.55); }
+}
+
+/* Floating elements : légère rotation au survol */
+.hero__float:hover {
+  animation-play-state: paused;
+  transform: translateY(-6px) scale(1.04);
+  transition: transform .3s ease;
+}
+
+/* FAQ : animation d'ouverture fluide */
+.faq__item[open] > p {
+  animation: faq-open .35s ease;
+}
+@keyframes faq-open {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Smooth scroll indicator : petit triangle animé en bas du hero */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 28px; left: 50%;
+  width: 22px; height: 22px;
+  border-right: 2.5px solid var(--primary);
+  border-bottom: 2.5px solid var(--primary);
+  transform: translateX(-50%) rotate(45deg);
+  opacity: .5;
+  animation: scroll-hint 2s ease-in-out infinite;
+}
+@keyframes scroll-hint {
+  0%, 100% { transform: translateX(-50%) rotate(45deg) translateY(0); opacity: .5; }
+  50% { transform: translateX(-50%) rotate(45deg) translateY(8px); opacity: .9; }
+}
+
+/* Tilt subtil sur les cartes au mousemove (géré par JS) */
+.feature.is-tilting,
+.role.is-tilting,
+.plan.is-tilting {
+  transition: transform .1s ease, box-shadow .3s ease;
+}
+
+/* Ripple au clic sur les boutons */
+@keyframes ripple {
+  to { transform: scale(4); opacity: 0; }
 }
