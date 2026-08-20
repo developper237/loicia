@@ -14,8 +14,8 @@
   <meta property="og:description" content="Présence par QR code (même hors ligne), notes, notifications, chatbot IA. Essai gratuit 14 jours — paiement MTN MoMo & Orange Money." />
   <meta property="og:locale" content="fr_CM" />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/adapter.png" />
+  <!-- Favicon SVG -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2306b6d4'/%3E%3Cpath d='M20 44V20l24 24V20' stroke='white' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -276,23 +276,6 @@
             <p>Le délégué ouvre l'app, affiche le QR code, et c'est parti : présence en direct, notes, notifications et rapports automatiques.</p>
           </div>
         </div>
-
-        <!-- Démo interactive téléphone -->
-        <div class="demo-wrap reveal">
-          <div class="demo-phone">
-            <div class="demo-phone__notch"></div>
-            <div class="demo-phone__screen">
-              <img id="demoSlide" src="assets/HOME.jpeg" alt="Démo SmartCampus" class="demo-phone__img" />
-              <div class="demo-phone__caption" id="demoCaption">
-                <strong>Tableau de bord</strong>
-                <span>Suivez vos classes en temps réel</span>
-              </div>
-            </div>
-            <div class="demo-phone__bar"></div>
-          </div>
-          <div class="demo-dots" id="demoDots"></div>
-          <div class="demo-labels" id="demoLabels"></div>
-        </div>
       </div>
     </section>
 
@@ -431,7 +414,7 @@
           <img class="pay-logo" src="https://upload.wikimedia.org/wikipedia/commons/a/af/MTN_Logo.svg" alt="MTN Mobile Money" width="72" height="26" loading="lazy" />
           <span>&amp;</span>
           <img class="pay-logo" src="https://upload.wikimedia.org/wikipedia/commons/1/19/Logo_Orange_Money.svg" alt="Orange Money" width="72" height="26" loading="lazy" />
-          <span>(via CinetPay). Facture électronique après chaque paiement. Sans engagement : annulez quand vous voulez.</span>
+          <span>Facture électronique après chaque paiement. Sans engagement : annulez quand vous voulez.</span>
         </p>
       </div>
     </section>
@@ -454,8 +437,8 @@
             <figcaption>
               <span class="testimonial__avatar">ME</span>
               <div>
-                <strong>M. Etoundi</strong>
-                <small>Directeur, lycée privé à Douala</small>
+                <strong>Sandra Mafotsing</strong>
+                <small>Etudiant, IUT de Douala</small>
               </div>
             </figcaption>
           </figure>
@@ -468,8 +451,8 @@
             <figcaption>
               <span class="testimonial__avatar">AA</span>
               <div>
-                <strong>Délégué de classe</strong>
-                <small>Université de Yaoundé</small>
+                <strong>Tifanie Tsopnang</strong>
+                <small>Délégué de classe,IUT de douala</small>
               </div>
             </figcaption>
           </figure>
@@ -482,94 +465,14 @@
             <figcaption>
               <span class="testimonial__avatar">NK</span>
               <div>
-                <strong>Mme Nkoa</strong>
-                <small>Secrétaire générale, institut à Bafoussam</small>
+                <strong>Hervé Tchouankouo</strong>
+                <small>chef de département, IUT de douala</small>
               </div>
             </figcaption>
           </figure>
         </div>
-
-        <!-- Avis utilisateurs (localStorage) -->
-        <div id="userReviews" class="testimonials testimonials--user"></div>
-        <div id="showMoreWrap" class="show-more-wrap" hidden>
-          <button id="showMoreBtn" class="btn btn--outline btn--sm">Voir plus d'avis</button>
-        </div>
-
-        <div class="review-cta reveal">
-          <p>Vous utilisez SmartCampus ?</p>
-          <button id="openReviewBtn" class="btn btn--primary btn--sm">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-            Laisser un avis
-          </button>
-        </div>
       </div>
     </section>
-
-    <!-- ═══════════ MODAL AVIS ═══════════ -->
-    <div class="modal" id="reviewModal" role="dialog" aria-modal="true" aria-labelledby="reviewTitle">
-      <div class="modal__overlay" data-close-review></div>
-      <div class="modal__dialog">
-        <button type="button" class="modal__close" data-close-review aria-label="Fermer">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        </button>
-        <div id="reviewFormView">
-          <h3 class="lead__title" id="reviewTitle">Partagez votre expérience</h3>
-          <p class="lead__sub">Votre avis aide d'autres établissements à découvrir SmartCampus.</p>
-          <form id="reviewForm" novalidate>
-            <div class="lead__row">
-              <div class="lead__field">
-                <label for="reviewNom">Nom <em>*</em></label>
-                <input id="reviewNom" name="nom" type="text" required placeholder="Ex: M. Kamga" maxlength="80" />
-              </div>
-              <div class="lead__field">
-                <label for="reviewEtab">Établissement <em>*</em></label>
-                <input id="reviewEtab" name="etablissement" type="text" required placeholder="Ex: Université de Douala" maxlength="100" />
-              </div>
-            </div>
-            <div class="lead__field">
-              <label for="reviewRole">Votre rôle <em>*</em></label>
-              <select id="reviewRole" name="role" required>
-                <option value="">Choisir...</option>
-                <option value="Directeur">Directeur / Chef d'établissement</option>
-                <option value="Chef de département">Chef de département</option>
-                <option value="Professeur">Professeur</option>
-                <option value="Délégué">Délégué de classe</option>
-                <option value="Secrétaire">Secrétaire / Administration</option>
-                <option value="Étudiant">Étudiant</option>
-              </select>
-            </div>
-            <div class="lead__field">
-              <label>Note <em>*</em></label>
-              <div id="reviewStars" class="review-stars" role="radiogroup" aria-label="Note">
-                <button type="button" class="star-btn" data-star="1" aria-label="1 étoile"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2l-6.1 3.4 1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg></button>
-                <button type="button" class="star-btn" data-star="2" aria-label="2 étoiles"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2l-6.1 3.4 1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg></button>
-                <button type="button" class="star-btn" data-star="3" aria-label="3 étoiles"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2l-6.1 3.4 1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg></button>
-                <button type="button" class="star-btn" data-star="4" aria-label="4 étoiles"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2l-6.1 3.4 1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg></button>
-                <button type="button" class="star-btn" data-star="5" aria-label="5 étoiles"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2l-6.1 3.4 1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg></button>
-              </div>
-              <input type="hidden" id="reviewNote" name="note" value="" />
-            </div>
-            <div class="lead__field">
-              <label for="reviewMessage">Votre avis <em>*</em></label>
-              <textarea id="reviewMessage" name="message" rows="3" required placeholder="Décrivez votre expérience avec SmartCampus..." maxlength="500"></textarea>
-            </div>
-            <p class="lead__error" id="reviewError" role="alert" hidden></p>
-            <button type="submit" class="btn btn--primary btn--block btn--lg" id="reviewSubmit">
-              <span class="lead__submit-label">Publier mon avis</span>
-              <span class="lead__spinner" aria-hidden="true" hidden></span>
-            </button>
-          </form>
-        </div>
-        <div id="reviewSuccessView" hidden>
-          <div class="lead__check" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="34" height="34" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M8 12.5l2.5 2.5L16 9.5" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <h3 class="lead__title">Merci pour votre avis !</h3>
-          <p class="lead__success-text">Il apparaîtra dans la section témoignages.</p>
-          <button type="button" class="btn btn--primary" data-close-review>Fermer</button>
-        </div>
-      </div>
-    </div>
 
     <!-- ═══════════ FAQ ═══════════ -->
     <section class="section section--dark" id="faq">
