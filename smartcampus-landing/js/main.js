@@ -301,6 +301,74 @@
     });
   }
 
+  /* ── Démo interactive téléphone ──────────────────────────── */
+  const demoSlides = [
+    { src: 'assets/HOME.jpeg',   title: 'Tableau de bord',       desc: 'Suivez vos classes en temps réel' },
+    { src: 'assets/appel.jpeg',  title: 'Appel de présence',     desc: "Lancez l'appel en 5 secondes" },
+    { src: 'assets/otp.png',     title: 'QR Code & OTP',         desc: 'Présence par scan même hors ligne' },
+    { src: 'assets/code.png',    title: 'Code hors ligne',       desc: 'Fonctionne sans connexion internet' },
+    { src: 'assets/notes.jpeg',  title: 'Notes & Bulletins',     desc: 'Consultez vos résultats en direct' },
+    { src: 'assets/QR.jpeg',     title: 'Reçu de présence',      desc: 'Confirmation instantanée de présence' },
+  ];
+  const demoImg = document.getElementById('demoSlide');
+  const demoCaption = document.getElementById('demoCaption');
+  const demoDotsWrap = document.getElementById('demoDots');
+  const demoLabelsWrap = document.getElementById('demoLabels');
+  let demoIndex = 0;
+  let demoTimer = null;
+
+  if (demoImg && demoDotsWrap) {
+    // Build dots
+    demoSlides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'demo-dot' + (i === 0 ? ' is-active' : '');
+      dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+      dot.addEventListener('click', () => goToDemo(i));
+      demoDotsWrap.appendChild(dot);
+    });
+    // Build labels
+    demoSlides.forEach((s, i) => {
+      const lbl = document.createElement('button');
+      lbl.className = 'demo-label' + (i === 0 ? ' is-active' : '');
+      lbl.textContent = s.title;
+      lbl.addEventListener('click', () => goToDemo(i));
+      demoLabelsWrap.appendChild(lbl);
+    });
+
+    function goToDemo(idx) {
+      if (idx === demoIndex) return;
+      demoImg.classList.add('is-changing');
+      demoCaption.style.opacity = '0';
+      setTimeout(() => {
+        demoIndex = idx;
+        demoImg.src = demoSlides[idx].src;
+        demoImg.alt = demoSlides[idx].title;
+        demoCaption.querySelector('strong').textContent = demoSlides[idx].title;
+        demoCaption.querySelector('span').textContent = demoSlides[idx].desc;
+        demoImg.classList.remove('is-changing');
+        demoCaption.style.opacity = '1';
+        updateDemoDots();
+      }, 350);
+      resetDemoTimer();
+    }
+
+    function updateDemoDots() {
+      demoDotsWrap.querySelectorAll('.demo-dot').forEach((d, i) => d.classList.toggle('is-active', i === demoIndex));
+      demoLabelsWrap.querySelectorAll('.demo-label').forEach((l, i) => l.classList.toggle('is-active', i === demoIndex));
+    }
+
+    function nextDemo() {
+      goToDemo((demoIndex + 1) % demoSlides.length);
+    }
+
+    function resetDemoTimer() {
+      clearInterval(demoTimer);
+      demoTimer = setInterval(nextDemo, 3500);
+    }
+
+    resetDemoTimer();
+  }
+
   /* ── Modal avis ─────────────────────────────────────────────── */
   const reviewModal = document.getElementById('reviewModal');
   const reviewForm = document.getElementById('reviewForm');
