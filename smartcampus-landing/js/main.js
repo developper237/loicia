@@ -305,8 +305,6 @@
   const demoSlides = [
     { src: 'assets/HOME.jpeg',   title: 'Tableau de bord',       desc: 'Suivez vos classes en temps réel' },
     { src: 'assets/appel.jpeg',  title: 'Appel de présence',     desc: "Lancez l'appel en 5 secondes" },
-    { src: 'assets/otp.png',     title: 'QR Code & OTP',         desc: 'Présence par scan même hors ligne' },
-    { src: 'assets/code.png',    title: 'Code hors ligne',       desc: 'Fonctionne sans connexion internet' },
     { src: 'assets/notes.jpeg',  title: 'Notes & Bulletins',     desc: 'Consultez vos résultats en direct' },
     { src: 'assets/QR.jpeg',     title: 'Reçu de présence',      desc: 'Confirmation instantanée de présence' },
   ];
