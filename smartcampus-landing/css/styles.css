@@ -641,6 +641,20 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.2; letter-spac
 }
 .testimonial strong { display: block; font-size: .92rem; }
 .testimonial small { color: var(--text-muted); font-size: .78rem; }
+.testimonials--user { margin-top: 24px; }
+.review-cta { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 28px; }
+.review-cta p { font-size: .95rem; color: var(--text-muted); font-weight: 500; }
+.show-more-wrap { text-align: center; margin-top: 20px; }
+
+/* ── Formulaire avis (étoiles) ───────────────────────────────── */
+.review-stars { display: flex; gap: 6px; }
+.star-btn {
+  background: none; border: none; cursor: pointer; padding: 2px;
+  color: #d1d5db; transition: color .15s, transform .15s;
+}
+.star-btn:hover, .star-btn.is-active { color: #facc15; transform: scale(1.15); }
+#reviewMessage { width: 100%; border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; font-size: .92rem; background: var(--bg); color: var(--text); resize: vertical; font-family: inherit; }
+#reviewMessage:focus { outline: none; border-color: var(--primary); }
 
 /* ── FAQ ──────────────────────────────────────────────────────── */
 .faq { display: flex; flex-direction: column; gap: 12px; }

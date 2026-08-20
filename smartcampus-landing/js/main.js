@@ -227,6 +227,152 @@
   // Clic sur l'overlay = fermeture
   leadModal.querySelector('.modal__overlay').addEventListener('click', closeLeadModal);
 
+  /* ── Système d'avis (localStorage) ────────────────────────────── */
+  const REVIEWS_KEY = 'smartcampus_reviews';
+  const VISIBLE_COUNT = 3;
+  let showAll = false;
+
+  const defaultReviews = [
+    { nom: 'M. Etoundi', etablissement: 'Lycée privé, Douala', role: 'Directeur', note: 5, message: 'Le QR code hors ligne a changé notre quotidien : les étudiants n'ont plus d'excuse pour rater l'\'appel, même quand le réseau coupe. On gagne 20 minutes par cours.', date: '2026-06-15' },
+    { nom: 'Délégué de classe', etablissement: 'Université de Yaoundé I', role: 'Délégué', note: 5, message: 'Fini les cahiers d'\'appel à remplir à la main. Je lance l'\'appel, l'\'app fait le reste et la direction a les statistiques en temps réel. Un gain de temps énorme.', date: '2026-07-02' },
+    { nom: 'Mme Nkoa', etablissement: 'Institut supérieur, Bafoussam', role: 'Secrétaire', note: 5, message: 'Le paiement par Mobile Money est un vrai plus : on a souscrit en 10 minutes depuis le bureau, sans carte bancaire. Le support répond vite et en français.', date: '2026-07-20' },
+  ];
+
+  function getReviews() {
+    try {
+      const stored = JSON.parse(localStorage.getItem(REVIEWS_KEY));
+      if (Array.isArray(stored) && stored.length > 0) return stored;
+    } catch (_) {}
+    return defaultReviews;
+  }
+
+  function saveReviews(reviews) {
+    localStorage.setItem(REVIEWS_KEY, JSON.stringify(reviews));
+  }
+
+  function starsHTML(count) {
+    const svg = '<svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2l-6.1 3.4 1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>';
+    return '<div class="testimonial__stars" aria-label="' + count + ' étoile(s) sur 5">' + svg.repeat(count) + '</div>';
+  }
+
+  function initials(name) {
+    return name.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+  }
+
+  function renderReviews() {
+    const container = document.getElementById('userReviews');
+    const wrap = document.getElementById('showMoreWrap');
+    if (!container) return;
+
+    const reviews = getReviews();
+    const toShow = showAll ? reviews : reviews.slice(0, VISIBLE_COUNT);
+
+    container.innerHTML = toShow.map(r => '
+      <figure class="testimonial reveal is-visible">
+        ' + starsHTML(r.note) + '
+        <blockquote>« ' + r.message.replace(/</g, '&lt;') + ' »</blockquote>
+        <figcaption>
+          <span class="testimonial__avatar">' + initials(r.nom) + '</span>
+          <div>
+            <strong>' + r.nom.replace(/</g, '&lt;') + '</strong>
+            <small>' + r.role.replace(/</g, '&lt;') + ', ' + r.etablissement.replace(/</g, '&lt;') + '</small>
+          </div>
+        </figcaption>
+      </figure>
+    ').join('');
+
+    if (wrap) {
+      if (reviews.length > VISIBLE_COUNT && !showAll) {
+        wrap.hidden = false;
+        document.getElementById('showMoreBtn').textContent = 'Voir plus d'\'avis (' + (reviews.length - VISIBLE_COUNT) + ')';
+      } else {
+        wrap.hidden = true;
+      }
+    }
+  }
+
+  renderReviews();
+
+  const showMoreBtn = document.getElementById('showMoreBtn');
+  if (showMoreBtn) {
+    showMoreBtn.addEventListener('click', () => {
+      showAll = true;
+      renderReviews();
+    });
+  }
+
+  /* ── Modal avis ─────────────────────────────────────────────── */
+  const reviewModal = document.getElementById('reviewModal');
+  const reviewForm = document.getElementById('reviewForm');
+  const reviewFormView = document.getElementById('reviewFormView');
+  const reviewSuccessView = document.getElementById('reviewSuccessView');
+  const reviewError = document.getElementById('reviewError');
+  const reviewStars = document.getElementById('reviewStars');
+  const reviewNote = document.getElementById('reviewNote');
+  let selectedNote = 0;
+
+  const openReviewModal = () => {
+    reviewForm.reset();
+    reviewError.hidden = true;
+    reviewSuccessView.hidden = true;
+    reviewFormView.hidden = false;
+    selectedNote = 0;
+    reviewNote.value = '';
+    reviewStars.querySelectorAll('.star-btn').forEach(b => b.classList.remove('is-active'));
+    reviewModal.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeReviewModal = () => {
+    reviewModal.classList.remove('is-open');
+    document.body.style.overflow = '';
+  };
+
+  document.getElementById('openReviewBtn')?.addEventListener('click', openReviewModal);
+  document.querySelectorAll('[data-close-review]').forEach(el => el.addEventListener('click', closeReviewModal));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && reviewModal.classList.contains('is-open')) closeReviewModal();
+  });
+  reviewModal.querySelector('.modal__overlay').addEventListener('click', closeReviewModal);
+
+  // Sélection d'étoiles
+  reviewStars.querySelectorAll('.star-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      selectedNote = parseInt(btn.dataset.star, 10);
+      reviewNote.value = selectedNote;
+      reviewStars.querySelectorAll('.star-btn').forEach(b => {
+        b.classList.toggle('is-active', parseInt(b.dataset.star, 10) <= selectedNote);
+      });
+    });
+  });
+
+  // Soumission
+  reviewForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!reviewForm.checkValidity()) { reviewForm.reportValidity(); return; }
+    if (!selectedNote) {
+      reviewError.textContent = 'Veuillez sélectionner une note.';
+      reviewError.hidden = false;
+      return;
+    }
+
+    const payload = Object.fromEntries(new FormData(reviewForm));
+    const reviews = getReviews();
+    reviews.unshift({
+      nom: payload.nom,
+      etablissement: payload.etablissement,
+      role: payload.role,
+      note: selectedNote,
+      message: payload.message,
+      date: new Date().toISOString().split('T')[0],
+    });
+    saveReviews(reviews);
+    renderReviews();
+
+    reviewFormView.hidden = true;
+    reviewSuccessView.hidden = false;
+  });
+
   leadForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!leadForm.checkValidity()) {
