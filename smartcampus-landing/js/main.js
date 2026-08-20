@@ -233,8 +233,8 @@
   let showAll = false;
 
   const defaultReviews = [
-    { nom: 'M. Etoundi', etablissement: 'Lycée privé, Douala', role: 'Directeur', note: 5, message: 'Le QR code hors ligne a changé notre quotidien : les étudiants n'ont plus d'excuse pour rater l'\'appel, même quand le réseau coupe. On gagne 20 minutes par cours.', date: '2026-06-15' },
-    { nom: 'Délégué de classe', etablissement: 'Université de Yaoundé I', role: 'Délégué', note: 5, message: 'Fini les cahiers d'\'appel à remplir à la main. Je lance l'\'appel, l'\'app fait le reste et la direction a les statistiques en temps réel. Un gain de temps énorme.', date: '2026-07-02' },
+    { nom: 'M. Etoundi', etablissement: 'Lycée privé, Douala', role: 'Directeur', note: 5, message: "Le QR code hors ligne a changé notre quotidien : les étudiants n'ont plus d'excuse pour rater l'appel, même quand le réseau coupe. On gagne 20 minutes par cours.", date: '2026-06-15' },
+    { nom: 'Délégué de classe', etablissement: 'Université de Yaoundé I', role: 'Délégué', note: 5, message: "Fini les cahiers d'appel à remplir à la main. Je lance l'appel, l'app fait le reste et la direction a les statistiques en temps réel. Un gain de temps énorme.", date: '2026-07-02' },
     { nom: 'Mme Nkoa', etablissement: 'Institut supérieur, Bafoussam', role: 'Secrétaire', note: 5, message: 'Le paiement par Mobile Money est un vrai plus : on a souscrit en 10 minutes depuis le bureau, sans carte bancaire. Le support répond vite et en français.', date: '2026-07-20' },
   ];
 
@@ -267,24 +267,24 @@
     const reviews = getReviews();
     const toShow = showAll ? reviews : reviews.slice(0, VISIBLE_COUNT);
 
-    container.innerHTML = toShow.map(r => '
-      <figure class="testimonial reveal is-visible">
-        ' + starsHTML(r.note) + '
-        <blockquote>« ' + r.message.replace(/</g, '&lt;') + ' »</blockquote>
-        <figcaption>
-          <span class="testimonial__avatar">' + initials(r.nom) + '</span>
-          <div>
-            <strong>' + r.nom.replace(/</g, '&lt;') + '</strong>
-            <small>' + r.role.replace(/</g, '&lt;') + ', ' + r.etablissement.replace(/</g, '&lt;') + '</small>
-          </div>
-        </figcaption>
-      </figure>
-    ').join('');
+    container.innerHTML = toShow.map(function(r) {
+      return '<figure class="testimonial reveal is-visible">' +
+        starsHTML(r.note) +
+        '<blockquote>\u00ab ' + r.message.replace(/</g, '&lt;') + ' \u00bb</blockquote>' +
+        '<figcaption>' +
+          '<span class="testimonial__avatar">' + initials(r.nom) + '</span>' +
+          '<div>' +
+            '<strong>' + r.nom.replace(/</g, '&lt;') + '</strong>' +
+            '<small>' + r.role.replace(/</g, '&lt;') + ', ' + r.etablissement.replace(/</g, '&lt;') + '</small>' +
+          '</div>' +
+        '</figcaption>' +
+      '</figure>';
+    }).join('');
 
     if (wrap) {
       if (reviews.length > VISIBLE_COUNT && !showAll) {
         wrap.hidden = false;
-        document.getElementById('showMoreBtn').textContent = 'Voir plus d'\'avis (' + (reviews.length - VISIBLE_COUNT) + ')';
+        document.getElementById('showMoreBtn').textContent = 'Voir plus d\'avis (' + (reviews.length - VISIBLE_COUNT) + ')';
       } else {
         wrap.hidden = true;
       }
